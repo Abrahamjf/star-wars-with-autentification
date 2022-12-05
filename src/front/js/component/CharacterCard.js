@@ -1,7 +1,11 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 
 export const CharacterCard = (props) => {
+    const { store, actions } = useContext(Context)
+
     return (
         <div className="d-flex container m-5">
             <div className="card" style={{ minWidth: "18rem" }}>
@@ -15,7 +19,7 @@ export const CharacterCard = (props) => {
                         <br></br>
                         <strong>Eye Color:</strong> {props.character.skin_color}
                     </p>
-                    <Link to={`/singleC/${props.character.uid}`}
+                    <Link to={`/Character/${props.character.uid}`}
                         className="btn btn-outline-primary">
                         Learn more!
                     </Link>
