@@ -6,8 +6,8 @@
     on that page only (the ones not reused in other pages).
 */
 
-.characters{
-    border: 1px solid black;
-    display: flex;
-    overflow-x: scroll;
+.characters {
+  border: 1px;
+  display: flex;
+  overflow-x: scroll;
 }

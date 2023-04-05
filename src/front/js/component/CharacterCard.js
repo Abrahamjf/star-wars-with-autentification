@@ -5,10 +5,15 @@ import { Context } from "../store/appContext";
 export const CharacterCard = (props) => {
   const { store, actions } = useContext(Context);
   const { character } = props;
+  console.log(character);
   return (
     <div className="d-flex container m-5">
       <div className="card" style={{ minWidth: "18rem" }}>
-        <img src={`https://starwars-visualguide.com/assets/img/characters/${character.uid}.jpg`} className="card-img-top" alt="..." />
+        <img
+          src={`https://starwars-visualguide.com/assets/img/characters/${character.uid}.jpg`}
+          className="card-img-top"
+          alt="..."
+        />
         <div className="card-body">
           <h5 className="card-title">{character?.properties?.name}</h5>
           <p className="card-text">

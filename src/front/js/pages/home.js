@@ -34,16 +34,16 @@ export const Home = () => {
           })}
         </div>
       </div>
-      {/*
+      
       <h2 className="text-danger mt-5">Planets</h2>
       <div className="carousel">
         <div className="characters">
-          {store.planets.map((planets, indexPlanet) => {
-            return <PlanetCard planets={planets} key={indexPlanet} />;
+          {store.planets.map((planet) => {
+            return <PlanetCard planets={planet} key={planet._id} />;
           })}
         </div>
       </div>
-
+  
       <h2 className="text-danger mt-5">Vehicles</h2>
       <div className="carousel">
         <div className="characters">
@@ -51,7 +51,7 @@ export const Home = () => {
             return <VehicleCard vehicles={vehicles} key={indexVehicle} />;
           })}
         </div>
-      </div> */}
+      </div> 
     </div>
   );
 };
