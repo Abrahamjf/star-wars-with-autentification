@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { CharacterCard } from "../component/CharacterCard";
@@ -8,21 +8,6 @@ import { VehicleCard } from "../component/VehicleCard";
 export const Home = () => {
   const { store, actions } = useContext(Context);
 
-  // useEffect(() => {
-  //   if (store.characters.length > 0) {
-  //     actions.getCharacteristics();
-  //   }
-  // }, [store.characters]);
-  // useEffect(() => {
-  //   if (store.planets.length > 0) {
-  //     actions.getPlanetCharacteristics();
-  //   }
-  // }, [store.planets]);
-  // useEffect(() => {
-  //   if (store.vehicles.length > 0) {
-  //     actions.getVehicleCharacteristics();
-  //   }
-  // }, [store.vehicles]);
 
   return (
     <div className="container">
@@ -34,7 +19,7 @@ export const Home = () => {
           })}
         </div>
       </div>
-      
+
       <h2 className="text-danger mt-5">Planets</h2>
       <div className="carousel">
         <div className="characters">
@@ -43,15 +28,15 @@ export const Home = () => {
           })}
         </div>
       </div>
-  
+
       <h2 className="text-danger mt-5">Vehicles</h2>
       <div className="carousel">
         <div className="characters">
-          {store.vehicles.map((vehicles, indexVehicle) => {
-            return <VehicleCard vehicles={vehicles} key={indexVehicle} />;
+          {store.vehicles.map((vehicles) => {
+            return <VehicleCard vehicles={vehicles} key={vehicles._id} />;
           })}
         </div>
-      </div> 
+      </div>
     </div>
   );
 };

@@ -31,19 +31,13 @@ export const VehicleCard = (props) => {
           >
             Learn more!
           </Link>
-          <a
-            href="#"
+          <button
+            type="button"
             className="btn btn-outline-warning amarillo"
-            onClick={(event) => actions.toggleFavorite(props.vehicles)}
+            onClick={(event) => actions.toggleFavorite(props.vehicles?._id)}
           >
-            <i
-              className={
-                actions.isFavorite(props.vehicles?.name) == undefined
-                  ? "far fa-heart"
-                  : "fas fa-heart"
-              }
-            ></i>
-          </a>
+            <i className="far fa-heart"></i>
+          </button>
         </div>
       </div>
     </div>

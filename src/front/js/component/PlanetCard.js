@@ -29,19 +29,22 @@ export const PlanetCard = (props) => {
           >
             Learn more!
           </Link>
-          <a
-            href="#"
+          <button
+            type="button"
             className="btn btn-outline-warning amarillo"
-            onClick={(event) => actions.toggleFavorite(props.planets)}
+            onClick={(event) => actions.toggleFavorite(props.planets?._id)}
           >
             <i
+            className="far fa-heart"
+            ></i>
+            {/* <i
               className={
                 actions.isFavorite(props.planets?.name) == undefined
                   ? "far fa-heart"
                   : "fas fa-heart"
               }
-            ></i>
-          </a>
+            ></i> */}
+          </button>
         </div>
       </div>
     </div>

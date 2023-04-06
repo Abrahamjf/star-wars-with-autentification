@@ -11,3 +11,6 @@
   display: flex;
   overflow-x: scroll;
 }
+.logo {
+  width: 15%;
+}

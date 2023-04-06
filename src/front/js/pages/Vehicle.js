@@ -7,13 +7,13 @@ export const Vehicle = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
 
-  let individuo = store.vehicleCharacteristics.find((characteristic) => {
-    return characteristic.uid == params.id;
+  let character = store.vehicleCharacteristics.find((vehicleCharacteristics) => {
+    return vehicleCharacteristics.uid == params.id;
   });
 
   return (
     <>
-      <div className="jumbotron container card mb-3 mt-5" key={individuo._id}>
+      <div className="jumbotron container card mb-3 mt-5" key={character?._id}>
         <div className="row g-0">
           <div className="col-md-4">
             <img
@@ -23,7 +23,7 @@ export const Vehicle = (props) => {
           </div>
           <div className="col-md-8">
             <div className="card-body">
-              <h1 className="card-title display-4">{individuo.model} </h1>
+              <h1 className="card-title display-4">{character?.model} </h1>
               <p className="card-text">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
                 perspiciatis sit possimus repudiandae totam, in blanditiis
@@ -55,13 +55,13 @@ export const Vehicle = (props) => {
                   </td>
                 </tr>
                 <tr>
-                  <td>{individuo.vehicle_class}</td>
-                  <td>{individuo.manufacturer}</td>
-                  <td>{individuo.lenght}</td>
-                  <td>{individuo.crew}</td>
-                  <td>{individuo.passengers}</td>
-                  <td>{individuo.cargo_capacity}</td>
-                  <td>{individuo.consumables}</td>
+                  <td>{character?.vehicle_class}</td>
+                  <td>{character?.manufacturer}</td>
+                  <td>{character?.lenght}</td>
+                  <td>{character?.crew}</td>
+                  <td>{character?.passengers}</td>
+                  <td>{character?.cargo_capacity}</td>
+                  <td>{character?.consumables}</td>
                 </tr>
               </table>
             </div>
