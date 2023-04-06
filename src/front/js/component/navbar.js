@@ -33,16 +33,14 @@ export const Navbar = (props) => {
             {store.favorites.map((fav) => {
               return (
                 <li key={fav.name}>
-                  <a href="#" className="dropdown-item">
-                    {fav.name}{" "}
-                    <button
-                      type="button"
-                      class="btn btn-danger mx-2"
-                      onClick={(event) => actions.toggleFavorite(fav)}
-                    >
-                      <i className="far fa-heart"></i>
-                    </button>
-                  </a>
+                  <button
+                    type="button"
+                    className="dropdown-item"
+                    onClick={(event) => actions.toggleFavorite(fav)}
+                  >
+                    {fav.properties?.name}
+                    <i className="far fa-heart ms-3"></i>
+                  </button>
                 </li>
               );
             })}

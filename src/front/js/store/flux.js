@@ -55,8 +55,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       toggleFavorite: (id) => {
         const store = getStore();
         let existed = store.favorites.find((fav) => fav._id == id);
-        console.log(existed);
-        console.log(id);
         if (!existed) {
           for (let endPoint of store.endPoints) {
             for (let item of store[endPoint]) {
