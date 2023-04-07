@@ -15,6 +15,7 @@ export const Character = (props) => {
   const getDetails = () => {
     const character = store.people.find((person) => person._id == params.id);
     setDetails(character);
+    console.log(character);
   };
   useEffect(() => {
     getDetails();

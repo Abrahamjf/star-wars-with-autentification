@@ -24,7 +24,7 @@ export const PlanetCard = (props) => {
             <strong>Terrain:</strong> {planets?.properties?.terrain}
           </p>
           <Link
-            to={`/Planet/${props.planets?.uid}`}
+            to={`/Planet/${props.planets?._id}`}
             className="btn btn-outline-primary"
           >
             Learn more!

@@ -6,24 +6,37 @@ import { Context } from "../store/appContext";
 export const Vehicle = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
+  const [details, setDetails] = useState("");
 
-  let character = store.vehicleCharacteristics.find((vehicleCharacteristics) => {
-    return vehicleCharacteristics.uid == params.id;
-  });
+  // let character = store.vehicleCharacteristics.find((vehicleCharacteristics) => {
+  //   return vehicleCharacteristics.uid == params.id;
+  // });
+  const getDetails = () => {
+    const character = store.vehicles.find(
+      (vehicle) => vehicle._id == params.id
+    );
+    setDetails(character);
+    console.log(character);
+  };
 
+  useEffect(() => {
+    getDetails();
+  }, []);
   return (
     <>
-      <div className="jumbotron container card mb-3 mt-5" key={character?._id}>
+      <div className="jumbotron container card mb-3 mt-5" key={details?._id}>
         <div className="row g-0">
           <div className="col-md-4">
             <img
-              src={`https://starwars-visualguide.com/assets/img/vehicles/${params.id}.jpg`}
+              src={`https://starwars-visualguide.com/assets/img/vehicles/${details?.uid}.jpg`}
               className="img-fluid rounded-start mt-4"
             />
           </div>
           <div className="col-md-8">
             <div className="card-body">
-              <h1 className="card-title display-4">{character?.model} </h1>
+              <h1 className="card-title display-4">
+                {details?.properties?.name}{" "}
+              </h1>
               <p className="card-text">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
                 perspiciatis sit possimus repudiandae totam, in blanditiis
@@ -55,13 +68,13 @@ export const Vehicle = (props) => {
                   </td>
                 </tr>
                 <tr>
-                  <td>{character?.vehicle_class}</td>
-                  <td>{character?.manufacturer}</td>
-                  <td>{character?.lenght}</td>
-                  <td>{character?.crew}</td>
-                  <td>{character?.passengers}</td>
-                  <td>{character?.cargo_capacity}</td>
-                  <td>{character?.consumables}</td>
+                  <td>{details?.properties?.vehicle_class}</td>
+                  <td>{details?.properties?.manufacturer}</td>
+                  <td>{details?.properties?.lenght}</td>
+                  <td>{details?.properties?.crew}</td>
+                  <td>{details?.properties?.passengers}</td>
+                  <td>{details?.properties?.cargo_capacity}</td>
+                  <td>{details?.properties?.consumables}</td>
                 </tr>
               </table>
             </div>

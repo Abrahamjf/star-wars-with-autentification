@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const VehicleCard = (props) => {
   const { store, actions } = useContext(Context);
   const { vehicles } = props;
-  console.log(vehicles);
+  
   return (
     <div className="d-flex container m-5">
       <div className="card" style={{ width: "18rem" }}>
@@ -23,10 +23,10 @@ export const VehicleCard = (props) => {
             <br></br>
             <strong>Crew:</strong> {vehicles?.properties?.crew}
             <br></br>
-            <strong>Passengers:</strong> {props.properties?.passengers}
+            <strong>Passengers:</strong> {vehicles?.properties?.passengers}
           </p>
           <Link
-            to={`/Vehicle/${props.vehicles?.uid}`}
+            to={`/Vehicle/${props.vehicles?._id}`}
             className="btn btn-outline-primary"
           >
             Learn more!
