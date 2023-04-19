@@ -18,7 +18,7 @@ export const Signup = () => {
     return (
         <React.Fragment>
             <div className="container signup w-50 mt-2">
-                <h1 className="text-center display-6">SIGNUP</h1>
+                <h1 className="text-center display-6">SIGN-UP</h1>
                 <form onSubmit={sendData}>
                     <div className="mb-3">
                         <label className="form-label">Username</label>
