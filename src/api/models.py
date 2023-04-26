@@ -26,51 +26,51 @@ class User(db.Model):
     
     def serialize(self):
         return {
-            "id": self.ide,
+            "id": self.id,
             "email":self.email,
             "username": self.username
         }
     
-    class Character(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        name = db.Column(db.String(120), nullable=False)
-        gender = db.Column(db.String(50))
-        hair_color = db.Column(db.String(50))
-        eye_color = db.Column(db.String(50))
-        height = db.Column(db.String(50))
-        skin_color = db.Column(db.String(50))
-        birth_year = db.Column(db.String(50))
-    
-        def __init__(self, **kwargs):
-            self.name = kwargs['name']
-            self.gender = kwargs['gender']
-            self.hair_color = kwargs['hair_color']
-            self.height = kwargs['height']
-            self.skin_color = kwargs['skin_color']
-            self.birth_year = kwargs['birth_year']
-        
-        @classmethod
-        def create(cls, **kwargs):
-            new_character = cls(**kwargs)
-            db.session.add(new_character)
+class Character(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    gender = db.Column(db.String(50))
+    hair_color = db.Column(db.String(50))
+    eye_color = db.Column(db.String(50))
+    height = db.Column(db.String(50))
+    skin_color = db.Column(db.String(50))
+    birth_year = db.Column(db.String(50))
 
-            try:
-                db.session.commit()
-                return new_character
-            except Exception as error:
-                raise Exception(error.args[0],400)
-        
-        def serialize(self):
-            return {
-                "id":self.id,
-                "name": self.name,
-                "gender":self.gender,
-                "hair_color": self.hair_color,
-                "eye_color": self.eye_color,
-                "height" : self.height,
-                "skin_color": self.skin_color,
-                "birth_year": self.birth_year
-            }
+    def __init__(self, **kwargs):
+        self.name = kwargs['name']
+        self.gender = kwargs['gender']
+        self.hair_color = kwargs['hair_color']
+        self.height = kwargs['height']
+        self.skin_color = kwargs['skin_color']
+        self.birth_year = kwargs['birth_year']
+    
+    @classmethod
+    def create(cls, **kwargs):
+        new_character = cls(**kwargs)
+        db.session.add(new_character)
+
+        try:
+            db.session.commit()
+            return new_character
+        except Exception as error:
+            raise Exception(error.args[0],400)
+    
+    def serialize(self):
+        return {
+            "id":self.id,
+            "name": self.name,
+            "gender":self.gender,
+            "hair_color": self.hair_color,
+            "eye_color": self.eye_color,
+            "height" : self.height,
+            "skin_color": self.skin_color,
+            "birth_year": self.birth_year
+        }
 class Planet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=False)

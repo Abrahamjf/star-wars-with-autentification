@@ -20,7 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       vehicles: JSON.parse(localStorage.getItem("vehicles")) || [],
       favorites: [],
       urlBase: "https://www.swapi.tech/api",
-      token: null
+      token: null,
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -29,102 +29,98 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       syncTokenFromSessionStorage: () => {
-				const token = sessionStorage.getItem("token");
-				console.log("App just loaded, syncing the session storage token");
-				if (token && token != "" && token != undefined)
-					setStore({ token: token });
-			},
+        const token = sessionStorage.getItem("token");
+        console.log("App just loaded, syncing the session storage token");
+        if (token && token != "" && token != undefined)
+          setStore({ token: token });
+      },
 
+      login: async (email, password) => {
+        const store = getStore();
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        };
 
-			login: async (email, password) => {
-				const store = getStore()
-				const options = {
-					method: 'POST',
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify({
-						email: email,
-						password: password,
-					})
-				};
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/token`, options);
+          if (response.status !== 200) {
+            let showError = await response.json();
+            alert(showError.msg);
+            return false;
+          }
 
-				try {
-					const response = await fetch(`${store.apiUrl}/api/token`, options);
-					if (response.status !== 200) {
-						let showError = await response.json();
-						alert(showError.msg);
-						return false;
-					};
+          const data = await response.json();
+          console.log("This came from the backend", data);
+          sessionStorage.setItem("token", data.access_token);
+          setStore({ token: data.access_token });
+          return true;
+        } catch (error) {
+          console.error("There was an error trying to login in", error);
+        }
+      },
 
-					const data = await response.json();
-					console.log("This came from the backend", data);
-					sessionStorage.setItem("token", data.access_token);
-					setStore({ token: data.access_token });
-					return true;
-				}
+      logout: () => {
+        sessionStorage.removeItem("token");
+        console.log("Login Out");
+        setStore({ token: null });
+      },
 
-				catch (error) {
-					console.error("There was an error trying to login in", error);
-				}
-			},
+      register: async (username, email, password) => {
+        const store = getStore();
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: username,
+            email: email,
+            password: password,
+          }),
+        };
 
+        try {
+          const response = await fetch(
+            `${process.env.BACKEND_URL}/api/users`,
+            options
+          );
+          if (!response.ok) {
+            let danger = await response.json();
+            alert(danger);
+            return false;
+          }
 
-			logout: () => {
-				sessionStorage.removeItem("token");
-				console.log("Login Out");
-				setStore({ token: null })
-			},
+          const data = await response.json();
+          console.log("This came from the backend", data);
+          return true;
+        } catch (error) {
+          console.error("There has been an error signin up");
+        }
+      },
 
-
-			register: async (username, email, password) => {
-				const store = getStore();
-				const options = {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						username: username,
-						email: email,
-						password: password,
-					}),
-				};
-
-				try {
-					const response = await fetch(`${store.apiUrl}/api/users`, options);
-					if (!response.ok) {
-						let danger = await response.json();
-						alert(danger);
-						return false;
-					}
-
-					const data = await response.json();
-					console.log("This came from the backend", data);
-					return true;
-				} catch (error) {
-					console.error("There has been an error signin up");
-				}
-			},
-
-
-			getAccess: async () => {
-				const store = getStore();
-				const options = {
-					headers: {
-						Authorization: "Bearer " + store.token,
-					},
-				};
-				try {
-					const response = await fetch(`${store.apiUrl}/api/private`, options);
-					const data = await response.json();
-					setStore({ message: data.message });
-					return data;
-				}
-				catch (error) {
-					console.log("Error getting message from the backend", error);
-				}
-			},
+      getAccess: async () => {
+        const store = getStore();
+        const options = {
+          headers: {
+            Authorization: "Bearer " + store.token,
+          },
+        };
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/private`, options);
+          const data = await response.json();
+          setStore({ message: data.message });
+          return data;
+        } catch (error) {
+          console.log("Error getting message from the backend", error);
+        }
+      },
 
       getItem: () => {
         const store = getStore();
