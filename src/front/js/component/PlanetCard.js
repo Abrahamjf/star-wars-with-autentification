@@ -10,7 +10,7 @@ export const PlanetCard = (props) => {
     <div className="d-flex container m-5">
       <div className="card" style={{ width: "18rem" }}>
         <img
-          src={`https://starwars-visualguide.com/assets/img/planets/${planets.uid}.jpg`}
+          src={`https://starwars-visualguide.com/assets/img/planets/${planets?.uid}.jpg`}
           className="card-img-top"
           alt="..."
         />
@@ -34,9 +34,7 @@ export const PlanetCard = (props) => {
             className="btn btn-outline-warning amarillo"
             onClick={(event) => actions.toggleFavorite(props.planets?._id)}
           >
-            <i
-            className="far fa-heart"
-            ></i>
+            <i className="far fa-heart"></i>
             {/* <i
               className={
                 actions.isFavorite(props.planets?.name) == undefined

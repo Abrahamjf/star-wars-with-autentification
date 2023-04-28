@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 export const VehicleCard = (props) => {
   const { store, actions } = useContext(Context);
   const { vehicles } = props;
-  
+
   return (
     <div className="d-flex container m-5">
       <div className="card" style={{ width: "18rem" }}>
         <img
-          src={`https://starwars-visualguide.com/assets/img/vehicles/${props.vehicles.uid}.jpg`}
+          src={`https://starwars-visualguide.com/assets/img/vehicles/${vehicles?.uid}.jpg`}
           className="card-img-top"
           alt="..."
         />

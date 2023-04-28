@@ -13,38 +13,64 @@ export const Navbar = (props) => {
             className="logo"
           />
         </Link>
-        <div className="ml-auto nav-item dropdown">
-          <button
-            className="btn btn-primary dropdown-toggle"
-            id="navbarScrollingDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <strong>
-              Favorites (
-              {store.favorites.length > 0 ? store.favorites.length : 0})
-            </strong>
-          </button>
-          <ul
-            className="dropdown-menu"
-            aria-labelledby="navbarScrollingDropdown"
-          >
-            {store.favorites.map((fav) => {
-              return (
-                <li key={fav.name}>
-                  <button
-                    type="button"
-                    className="dropdown-item"
-                    onClick={(event) => actions.toggleFavorite(fav)}
-                  >
-                    {fav.properties?.name}
-                    <i className="far fa-heart ms-3"></i>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+        <div className="ps-2">
+          {!store.token ? (
+            <div></div>
+          ) : (
+            <div className="ml-auto nav-item dropdown">
+              <button
+                className="btn btn-primary dropdown-toggle"
+                id="navbarScrollingDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <strong>
+                  Favorites (
+                  {store.favorites.length > 0 ? store.favorites.length : 0})
+                </strong>
+              </button>
+              <ul
+                className="dropdown-menu"
+                aria-labelledby="navbarScrollingDropdown"
+              >
+                {store.favorites.map((fav) => {
+                  return (
+                    <li key={fav.name}>
+                      <button
+                        type="button"
+                        className="dropdown-item"
+                        onClick={(event) => actions.toggleFavorite(fav)}
+                      >
+                        {fav.properties?.name}
+                        <i className="far fa-heart ms-3"></i>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
+        </div>
+        <div className="ps-2">
+          {!store.token ? (
+            <div>
+              <Link to="/login">
+                <button className="btn btn-dark">Log In</button>
+              </Link>
+            </div>
+          ) : (
+            <Link to="/login">
+              <button
+                className="btn btn-danger"
+                onClick={() => {
+                  actions.logout();
+                }}
+              >
+                Logout
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </nav>

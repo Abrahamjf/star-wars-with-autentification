@@ -17,7 +17,7 @@ export const MyHome = () => {
           <h2 className="text-danger text-start my-4 display-4">Characters</h2>
           <div className=" carousel mb-5">
             <div className="itemcard gap-5">
-              {store.characters.map((character, index) => {
+              {store.people.map((character, index) => {
                 return (
                   <CharacterCard
                     character={character}
